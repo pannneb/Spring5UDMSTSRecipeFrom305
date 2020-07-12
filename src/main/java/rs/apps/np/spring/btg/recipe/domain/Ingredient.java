@@ -15,7 +15,7 @@ public class Ingredient {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Id id;
+	private Long id;
 
 	private String description;
 
@@ -51,11 +51,11 @@ public class Ingredient {
 		this.recipe = recipe;
 	}
 
-	public Id getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Id id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
