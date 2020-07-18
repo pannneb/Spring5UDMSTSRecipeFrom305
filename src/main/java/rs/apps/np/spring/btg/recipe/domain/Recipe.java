@@ -1,6 +1,7 @@
 package rs.apps.np.spring.btg.recipe.domain;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -30,11 +31,12 @@ public class Recipe {
 	private Integer servTime;
 	private String source;
 	private String url;
+	@Lob
 	private String direction;
 	// private Difficulty difficulty;
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
-	private Set<Ingredient> ingredients;
+	private Set<Ingredient> ingredients = new HashSet<Ingredient>();
 
 	@Lob
 	private Byte[] image;
@@ -54,7 +56,7 @@ public class Recipe {
  	    joinColumns = @JoinColumn(name = "recipe_id"),
  	    inverseJoinColumns =  @JoinColumn(name = "category_id")
 	) 
-	private Set<Category> categories;
+	private Set<Category> categories = new HashSet<Category>();
 
 	public String getDescription() {
 		return description;
