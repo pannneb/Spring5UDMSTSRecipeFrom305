@@ -128,6 +128,13 @@ public class Recipe {
 
 	public void setNotes(Notes notes) {
 		this.notes = notes;
+		notes.setRecipe(this);
+	}
+
+	public Recipe addIngredient(Ingredient i) {
+		i.setRecipe(this);
+		this.ingredients.add(i);
+		return this;
 	}
 
 	@Override
