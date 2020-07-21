@@ -1,9 +1,12 @@
 package rs.apps.np.spring.btg.recipe.controllers;
 
+import java.util.Optional;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import rs.apps.np.spring.btg.recipe.domain.Category;
 import rs.apps.np.spring.btg.recipe.services.RecipeService;
 
 @Controller
@@ -40,6 +43,12 @@ public class IndexController {
 
 		model.addAttribute("recipes", recipeService.getRecipes());
 
+		recipeService.getRecipes().forEach(a->{
+			a.getCategories().forEach(c->{
+				System.out.println(c.toString());
+			});
+		});
+		
 		return "index";
 	}
 

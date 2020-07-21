@@ -102,7 +102,10 @@ public class RecipeBootstrap  implements ApplicationListener<ContextRefreshedEve
 
         Category americanCategory = americanCategoryOptional.get();
         Category mexicanCategory = mexicanCategoryOptional.get();
-
+        americanCategory.getId();
+		System.out.println("americanCategory: " + americanCategory.getId());
+        System.out.println("americanCategory");
+        
         //Yummy Guac
         Recipe guacRecipe = new Recipe();
         guacRecipe.setDescription("Perfect Guacamole");
