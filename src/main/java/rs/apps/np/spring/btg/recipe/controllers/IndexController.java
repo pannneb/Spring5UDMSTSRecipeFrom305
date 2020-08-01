@@ -1,6 +1,7 @@
 package rs.apps.np.spring.btg.recipe.controllers;
 
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import lombok.extern.slf4j.Slf4j;
 import rs.apps.np.spring.btg.recipe.domain.Category;
+import rs.apps.np.spring.btg.recipe.domain.Recipe;
 import rs.apps.np.spring.btg.recipe.services.RecipeService;
 
 @Controller
@@ -45,9 +47,10 @@ public class IndexController {
 //		}
 //		System.out.println("UnitOfMeasure ID is :" +unitOfMeasureOptional.get().getId());
 
-		model.addAttribute("recipes", recipeService.getRecipes());
+		Set<Recipe> listOfRecipes = recipeService.getRecipes();
+		model.addAttribute("recipes", listOfRecipes);
 
-		recipeService.getRecipes().forEach(a->{
+		listOfRecipes.forEach(a->{
 			a.getCategories().forEach(c->{
 				System.out.println(c.toString());
 			});
