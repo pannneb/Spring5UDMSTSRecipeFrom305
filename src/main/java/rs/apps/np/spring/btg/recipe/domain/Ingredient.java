@@ -1,6 +1,7 @@
 package rs.apps.np.spring.btg.recipe.domain;
 
 import java.math.BigDecimal;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
+import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,8 +20,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Entity
 @Slf4j
-@Getter
-@Setter
+@Data
 @ToString(exclude = "recipe")
 @EqualsAndHashCode(exclude = "recipe")
 public class Ingredient {

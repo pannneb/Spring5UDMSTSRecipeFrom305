@@ -1,6 +1,7 @@
 package rs.apps.np.spring.btg.recipe.domain;
 
 import java.math.BigDecimal;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,8 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Entity
 @Slf4j
-@Getter
-@Setter
+@Data
 @ToString(exclude = "recipe")
 @EqualsAndHashCode(exclude = "recipe")
 public class Notes {

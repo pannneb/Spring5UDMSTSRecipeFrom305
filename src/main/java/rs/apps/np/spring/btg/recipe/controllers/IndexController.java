@@ -6,10 +6,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import lombok.extern.slf4j.Slf4j;
 import rs.apps.np.spring.btg.recipe.domain.Category;
 import rs.apps.np.spring.btg.recipe.services.RecipeService;
 
 @Controller
+@Slf4j
 public class IndexController {
 
 	private RecipeService recipeService;
@@ -29,6 +31,8 @@ public class IndexController {
 
 	@RequestMapping({ "", "/", "/index" })
 	public String getIndexPage(Model model) {
+		
+		log.info("Getting Index Page");
 
 //		String categoryDesc = "Americanaaa";
 //		Optional<Category> categoryOptional = categoryRepository.findByDescription(categoryDesc);
