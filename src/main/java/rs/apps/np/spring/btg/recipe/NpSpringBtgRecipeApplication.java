@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class NpSpringBtgRecipeApplication {
 
 	public static void main(String[] args) {
-		SpringApplicadsation.run(NpSpringBtgRecipeApplication.class, args);
+		SpringApplication.run(NpSpringBtgRecipeApplication.class, args);
 	}
 
 }
