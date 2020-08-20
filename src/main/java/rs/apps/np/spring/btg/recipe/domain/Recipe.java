@@ -32,10 +32,12 @@ public class Recipe {
 	private String description;
 	private Integer prepTime;
 	private Integer cookTime;
-	private Integer servTime;
+//	private Integer servTime;
+    private Integer servings;
 	private String source;
-	private String url;
-	@Lob
+	private String url; 
+
+	@Lob 
 	private String direction;
 	// private Difficulty difficulty;
 
