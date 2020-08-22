@@ -18,10 +18,13 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
+@Getter
+@Setter
 @Entity
-@Data
 @Slf4j
 public class Recipe {
 

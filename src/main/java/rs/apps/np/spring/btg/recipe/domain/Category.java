@@ -14,10 +14,11 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+
+@Getter
+@Setter
+@EqualsAndHashCode(exclude = {"recipes"})
 @Entity
-@Data
-@ToString(exclude = "recipes")
-@EqualsAndHashCode(exclude = "recipes")
 public class Category {
 
 	@Id

@@ -18,11 +18,10 @@ import lombok.Setter;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 
+@Getter
+@Setter
+@EqualsAndHashCode(exclude = {"recipe"})
 @Entity
-@Slf4j
-@Data
-@ToString(exclude = "recipe")
-@EqualsAndHashCode(exclude = "recipe")
 public class Ingredient {
 
 	@Id

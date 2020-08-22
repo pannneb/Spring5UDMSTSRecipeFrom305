@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import lombok.extern.slf4j.Slf4j;
 import rs.apps.np.spring.btg.recipe.commands.IngredientCommand;
 import rs.apps.np.spring.btg.recipe.commands.RecipeCommand;
+import rs.apps.np.spring.btg.recipe.commands.UnitOfMeasureCommand;
 import rs.apps.np.spring.btg.recipe.domain.Recipe;
 import rs.apps.np.spring.btg.recipe.services.IngredientService;
 import rs.apps.np.spring.btg.recipe.services.RecipeService;
@@ -51,13 +52,36 @@ public class IngredientController {
         return "recipe/ingredient/show";
     }
 
+
+    @GetMapping
+    @RequestMapping("recipe/{recipeId}/ingredient/new")
+    public String newRecipeIngredient(@PathVariable String recipeId,
+                                       Model model){
+    	
+    	RecipeCommand recipeCommand = recipeService.findCommandById(Long.valueOf(recipeId));
+
+		if (recipeCommand == null) {
+			throw new RuntimeException("recipeCommand is null");
+		}
+    	IngredientCommand ic = new IngredientCommand();
+    	ic.setRecipeId(Long.valueOf(recipeId));
+    	
+    	
+        model.addAttribute("ingredient", ic);
+
+        ic.setUom(new UnitOfMeasureCommand());
+        model.addAttribute("uomList", unitOfMeasureService.listAllUoms());
+        return "recipe/ingredient/ingredientform";
+    }
+
+    
     @GetMapping
     @RequestMapping("recipe/{recipeId}/ingredient/{id}/update")
     public String updateRecipeIngredient(@PathVariable String recipeId,
                                        @PathVariable String id, Model model){
         model.addAttribute("ingredient", ingredientService.findByRecipeIdAndIngredientId(Long.valueOf(recipeId), Long.valueOf(id)));
         model.addAttribute("uomList", unitOfMeasureService.listAllUoms());
-            return "recipe/ingredient/ingredientform";
+        return "recipe/ingredient/ingredientform";
     }
 
     @PostMapping("recipe/{recipeId}/ingredient")
