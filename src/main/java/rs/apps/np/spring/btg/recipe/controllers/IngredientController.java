@@ -11,17 +11,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import lombok.extern.slf4j.Slf4j;
 import rs.apps.np.spring.btg.recipe.commands.RecipeCommand;
 import rs.apps.np.spring.btg.recipe.domain.Recipe;
+import rs.apps.np.spring.btg.recipe.services.IngredientService;
 import rs.apps.np.spring.btg.recipe.services.RecipeService;
 
 @Controller
 @Slf4j
 public class IngredientController {
 
-	RecipeService recipeService;
+	private final RecipeService recipeService;
+    private final IngredientService ingredientService;
 
-	public IngredientController(RecipeService recipeService) {
+	public IngredientController(RecipeService recipeService, IngredientService ingredientService) {
 		super();
 		this.recipeService = recipeService;
+		this.ingredientService = ingredientService;
 	}
 
     @GetMapping
@@ -35,4 +38,11 @@ public class IngredientController {
         return "recipe/ingredient/list";
     }
 
+    @GetMapping
+    @RequestMapping("recipe/{recipeId}/ingredient/{id}/show")
+    public String showRecipeIngredient(@PathVariable String recipeId,
+                                       @PathVariable String id, Model model){
+        model.addAttribute("ingredient", ingredientService.findByRecipeIdAndIngredientId(Long.valueOf(recipeId), Long.valueOf(id)));
+        return "recipe/ingredient/show";
+    }
 }
