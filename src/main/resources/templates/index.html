@@ -21,6 +21,17 @@
 		integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" 
 		crossorigin="anonymous"  th:href="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
 	
+	<script>
+    $( document ).ready(function() {
+        console.log( "document loaded" );
+        $('#idyourdiv').val().replace(/\n\r?/g, '<br />')
+    });
+ 
+    $( window ).on( "load", function() {
+        console.log( "window loaded" );
+    });
+    </script>
+
 </head>
 
 <body>

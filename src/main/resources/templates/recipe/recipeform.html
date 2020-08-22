@@ -15,6 +15,26 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
             integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
             crossorigin="anonymous" th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
+
+
+	<script>
+    $( document ).ready(function() {
+        console.log( "document loaded" );
+
+        // $('#pDirection').val().replace(/\n\r?/g, '<br />')
+        // alert($('#pDirection').val());
+        $( ('#pDirection') ).html( $('#pDirection').text().replace(/\n\r?/g, '&#13;&#10;') );
+        $( ('#pNotes') ).html( $('#pNotes').text().replace(/\n\r?/g, '&#13;&#10;') );
+        console.log( $('#pDirection').text());
+        
+    });
+ 
+    $( window ).on( "load", function() {
+        console.log( "window loaded" );
+        // salert($('#pDirection').val());
+    });
+    </script>
+
 </head>
 <body>
 <!--/*@thymesVar id="recipe" type="guru.springframework.domain.Recipe"*/-->
@@ -102,9 +122,10 @@
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <ul>
+                                    <ul th:if="${not #lists.isEmpty(recipe.ingredients)}">
                                         <li th:remove="all">1 Cup of milk</li>
                                         <li th:remove="all">1 Teaspoon of chocolate</li>
+                                        <li th:remove="all">asdf</li>
                                         <li th:each="ingredient : ${recipe.ingredients}"
                                             th:text="${(ingredient.getAmount() +
                                         ' ' + ingredient.uom.getDescription() +
@@ -122,7 +143,7 @@
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-md-12 form-group">
-                                    <textarea class="form-control" rows="3" th:field="*{direction}"></textarea></div>
+                                    <textarea id="pDirection" class="form-control" rows="3" th:field="*{direction}"></textarea></div>
                             </div>
                         </div>
                     </div>
@@ -133,7 +154,7 @@
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-md-12 form-group">
-                                    <textarea class="form-control" rows="3" th:field="*{notes.recipeNotes}"></textarea>
+                                    <textarea id="pNotes" class="form-control" rows="3" th:field="*{notes.recipeNotes}"></textarea>
                                 </div>
                             </div>
                         </div>
