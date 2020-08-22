@@ -21,6 +21,9 @@ import java.util.Optional;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -113,6 +116,25 @@ public class IngredientServiceImplTest {
         verify(recipeRepository, times(1)).findById(anyLong());
         verify(recipeRepository, times(1)).save(any(Recipe.class));
 
+    }
+
+    @Test
+    public void testDeleteById() throws Exception {
+    	// given
+    	Recipe r = new Recipe();
+    	Ingredient i1 = new Ingredient();
+    	i1.setId(3L);
+    	r.addIngredient(i1);
+    	Optional<Recipe> rOpt = Optional.of(r);
+    	
+    	when (recipeRepository.findById(anyLong())).thenReturn(rOpt);
+    	
+    	// when
+    	ingredientService.deleteById(1L, 3L);
+    	
+    	// then
+        verify (recipeRepository, times(1)).findById(anyLong());//(anyLong());
+        verify (recipeRepository, times(1)).save(any(Recipe.class));//(anyLong());
     }
     
 }
