@@ -1,5 +1,6 @@
 package rs.apps.np.spring.btg.recipe.services;
 
+import java.io.IOException;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
@@ -20,10 +21,41 @@ import org.springframework.web.multipart.MultipartFile;
 @Service
 @Slf4j
 // @Log
-public class ImageServiceImpl implements ImageService {@Override
+public class ImageServiceImpl implements ImageService {
 
-	public void saveImageFile(Long recipeId, MultipartFile file) {
-		log.debug("Received a file");
-	}
+    private final RecipeRepository recipeRepository;
+
+    public ImageServiceImpl( RecipeRepository recipeService) {
+
+        this.recipeRepository = recipeService;
+    }
+    
+
+    @Override
+    @Transactional
+    public void saveImageFile(Long recipeId, MultipartFile file) {
+    	log.debug("Received a file");
+    	
+        try {
+            Recipe recipe = recipeRepository.findById(recipeId).get();
+
+            Byte[] byteObjects = new Byte[file.getBytes().length];
+
+            int i = 0;
+
+            for (byte b : file.getBytes()){
+                byteObjects[i++] = b;
+            }
+
+            recipe.setImage(byteObjects);
+
+            recipeRepository.save(recipe);
+        } catch (IOException e) {
+            //todo handle better
+            log.error("Error occurred", e);
+
+            e.printStackTrace();
+        }
+    }
 
 }
