@@ -13,6 +13,7 @@ import rs.apps.np.spring.btg.recipe.commands.RecipeCommand;
 import rs.apps.np.spring.btg.recipe.converters.RecipeCommandToRecipe;
 import rs.apps.np.spring.btg.recipe.converters.RecipeToRecipeCommand;
 import rs.apps.np.spring.btg.recipe.domain.Recipe;
+import rs.apps.np.spring.btg.recipe.exceptions.NotFoundException;
 import rs.apps.np.spring.btg.recipe.repositories.RecipeRepository;
 // import lombok.extern.java.Log;
 
@@ -45,16 +46,14 @@ public class RecipeServiceImpl implements RecipeService {
 	}
 
 	@Override
-	public Recipe findById(Long id) {
-		
+	public Recipe findById(Long id) {		
 		Optional<Recipe> recipeOptional =  recipeRepository.findById(id);
 		if (!recipeOptional.isPresent()) {
-			throw new RuntimeException("Recipe Not Found");
+			// throw new RuntimeException("Recipe Not Found");
+			throw new NotFoundException("Recipe Not Found");
 		}
 		
 		return recipeOptional.get();
-		// TODO Auto-generated method stub
-		// return null;
 	}
 
 	@Override

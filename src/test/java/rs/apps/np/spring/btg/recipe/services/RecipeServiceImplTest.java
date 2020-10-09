@@ -22,6 +22,7 @@ import rs.apps.np.spring.btg.recipe.commands.RecipeCommand;
 import rs.apps.np.spring.btg.recipe.converters.RecipeCommandToRecipe;
 import rs.apps.np.spring.btg.recipe.converters.RecipeToRecipeCommand;
 import rs.apps.np.spring.btg.recipe.domain.Recipe;
+import rs.apps.np.spring.btg.recipe.exceptions.NotFoundException;
 import rs.apps.np.spring.btg.recipe.repositories.RecipeRepository;
 
 public class RecipeServiceImplTest {
@@ -59,7 +60,18 @@ public class RecipeServiceImplTest {
 		verify(recipeRepository, never()).findAll();
 
 	}
-	
+
+	@Test (expected = NotFoundException.class) 
+	public void testGetRecipeByIdNotFound() {
+		Optional <Recipe> rOpt = Optional.empty();
+		
+		when (recipeRepository.findById(anyLong())).thenReturn(rOpt);
+		Recipe recReturned = recipeService.findById(1L);
+		
+		// should go boom
+
+	}
+
 	@Test
 	public void getRecipeCommandByIdTest() throws Exception {
 		Recipe recipe = new Recipe();
