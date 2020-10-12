@@ -64,6 +64,15 @@ public class RecipeControllerTest {
 	}
 
 	@Test
+	public void testGetRecipeNumberFormatExceptiond() throws Exception {
+		//when(recipeService.findById(anyLong()))
+		//		.thenThrow(rs.apps.np.spring.btg.recipe.exceptions.NotFoundException.class);
+		mockMvc.perform(get("/recipe/aaa/show"))
+			.andExpect(status().isBadRequest())
+			.andExpect(view().name("400error"));
+	}
+
+	@Test
 	public void testGetNewRecipeForm() throws Exception {
 		// RecipeCommand command = new RecipeCommand();
 
