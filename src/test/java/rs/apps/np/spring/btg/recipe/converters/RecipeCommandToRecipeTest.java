@@ -58,7 +58,7 @@ public class RecipeCommandToRecipeTest {
 		recipeCommand.setPrepTime(PREP_TIME);
 		recipeCommand.setDescription(DESCRIPTION);
 		recipeCommand.setDifficulty(DIFFICULTY);
-		recipeCommand.setDirection(DIRECTIONS);
+		recipeCommand.setDirections(DIRECTIONS);
 		recipeCommand.setServings(SERVINGS);
 		recipeCommand.setSource(SOURCE);
 		recipeCommand.setUrl(URL);
@@ -95,7 +95,7 @@ public class RecipeCommandToRecipeTest {
 		assertEquals(PREP_TIME, recipe.getPrepTime());
 		assertEquals(DESCRIPTION, recipe.getDescription());
 		assertEquals(DIFFICULTY, recipe.getDifficulty());
-		assertEquals(DIRECTIONS, recipe.getDirection());
+		assertEquals(DIRECTIONS, recipe.getDirections());
 		assertEquals(SERVINGS, recipe.getServings());
 		assertEquals(SOURCE, recipe.getSource());
 		assertEquals(URL, recipe.getUrl());

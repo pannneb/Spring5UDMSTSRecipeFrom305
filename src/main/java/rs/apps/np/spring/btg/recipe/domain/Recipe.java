@@ -41,7 +41,7 @@ public class Recipe {
 	private String url; 
 
 	@Lob 
-	private String direction;
+	private String directions;
 	// private Difficulty difficulty;
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
