@@ -8,16 +8,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
-import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
-
 
 @Getter
 @Setter
-@EqualsAndHashCode(exclude = {"recipes"})
+@EqualsAndHashCode(exclude = { "recipes" })
 @Entity
 public class Category {
 
@@ -28,6 +25,15 @@ public class Category {
 
 	@ManyToMany(mappedBy = "categories")
 	private Set<Recipe> recipes;
+
+	public Category(String description) {
+		super();
+		this.description = description;
+	}
+
+	public Category() {
+		super();
+	}
 
 //	//public Long getId() {
 //	//	return id;

@@ -15,6 +15,14 @@ import lombok.extern.slf4j.Slf4j;
 @Entity
 public class UnitOfMeasure {
 
+	public UnitOfMeasure(String string) {
+		this.description=string;
+	}
+
+	public UnitOfMeasure() {
+		// TODO Auto-generated constructor stub
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;

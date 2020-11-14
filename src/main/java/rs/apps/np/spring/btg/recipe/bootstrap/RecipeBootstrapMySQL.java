@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.context.ApplicationListener;
+import org.springframework.context.annotation.Profile;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,13 +24,14 @@ import lombok.extern.slf4j.Slf4j;
 
 @Component
 @Slf4j
-public class RecipeBootstrap  implements ApplicationListener<ContextRefreshedEvent>{
+@Profile({"default"})
+public class RecipeBootstrapMySQL  implements ApplicationListener<ContextRefreshedEvent>{
 
 	private CategoryRepository categoryRepository;
 	private UnitOfMeasureRepository unitOfMeasureRepository;
 	private RecipeRepository recipeRepository;
 
-	public RecipeBootstrap(CategoryRepository categoryRepository, UnitOfMeasureRepository unitOfMeasureRepository,
+	public RecipeBootstrapMySQL(CategoryRepository categoryRepository, UnitOfMeasureRepository unitOfMeasureRepository,
 			RecipeRepository recipeRepository) {
 		super();
 		this.categoryRepository = categoryRepository;
@@ -47,6 +49,25 @@ public class RecipeBootstrap  implements ApplicationListener<ContextRefreshedEve
 	private List<Recipe> getRecipes(){
 
         List<Recipe> recipes = new ArrayList<>(2);
+
+		if (!unitOfMeasureRepository.findByDescription("Each").isPresent()) {
+			unitOfMeasureRepository.save(new UnitOfMeasure("Each"));
+		}
+		if (!unitOfMeasureRepository.findByDescription("Tablespoon").isPresent()) {
+			unitOfMeasureRepository.save(new UnitOfMeasure("Tablespoon"));
+		}
+		if (!unitOfMeasureRepository.findByDescription("Teaspoon").isPresent()) {
+			unitOfMeasureRepository.save(new UnitOfMeasure("Teaspoon"));
+		}
+		if (!unitOfMeasureRepository.findByDescription("Dash").isPresent()) {
+			unitOfMeasureRepository.save(new UnitOfMeasure("Dash"));
+		}
+		if (!unitOfMeasureRepository.findByDescription("Pint").isPresent()) {
+			unitOfMeasureRepository.save(new UnitOfMeasure("Pint"));
+		}
+		if (!unitOfMeasureRepository.findByDescription("Cup").isPresent()) {
+			unitOfMeasureRepository.save(new UnitOfMeasure("Cup"));
+		}
 
         //get UOMs
         Optional<UnitOfMeasure> eachUomOptional = unitOfMeasureRepository.findByDescription("Each");
@@ -93,6 +114,12 @@ public class RecipeBootstrap  implements ApplicationListener<ContextRefreshedEve
         UnitOfMeasure pintUom = pintUomOptional.get();
         UnitOfMeasure cupsUom = cupsUomOptional.get();
 
+        if (!categoryRepository.findByDescription("American").isPresent()) {
+        	categoryRepository.save(new Category("American"));
+        }
+        if (!categoryRepository.findByDescription("Mexican").isPresent()) {
+        	categoryRepository.save(new Category("Mexican"));
+        }
         //get Categories
         Optional<Category> americanCategoryOptional = categoryRepository.findByDescription("American");
 
